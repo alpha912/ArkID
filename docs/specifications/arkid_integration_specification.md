@@ -47,7 +47,7 @@ Format examples:
 
 Each entity type follows a strictly defined JSON schema that ensures data consistency and validation:
 
-#### **Idea Schema (v1.0.0)**
+#### **Idea Schema (v1.1.0)**
 Required fields:
 - `arkidIdea`: Unique identifier (ARKI-prefix) following ISO 27729
 - `creationDate`: ISO 8601 timestamp
@@ -61,7 +61,7 @@ Optional fields:
 - Status (Draft/Published/Archived)
 - Verification status
 
-#### **User Schema (v1.0.0)**
+#### **User Schema (v1.1.0)**
 Required fields:
 - `arkidUser`: Unique identifier (ARKU-prefix) following ISO 27729
 - `creationDate`: ISO 8601 timestamp
@@ -79,7 +79,7 @@ Optional fields:
 - Website URL
 - Verification status (Verified/Pending/Rejected)
 
-#### **Project Schema (v1.0.0)**
+#### **Project Schema (v1.1.0)**
 Required fields:
 - `arkidProject`: Unique identifier (ARKP-prefix)
 - `projectDetails`: Object containing:
@@ -96,7 +96,7 @@ Optional fields:
 - Publications (DOIs, ISBNs, arXiv IDs)
 - Funding information
 
-#### **Organization Schema (v1.0.0)**
+#### **Organization Schema (v1.1.0)**
 Required fields:
 - `arkidOrg`: Unique identifier (ARKO-prefix)
 - `organizationDetails`: Object containing:
@@ -116,7 +116,7 @@ Optional fields:
 - Associated people
 - Associated products
 
-#### **Product Schema (v1.0.0)**
+#### **Product Schema (v1.1.0)**
 Required fields:
 - `arkidProduct`: Unique identifier (ARKD-prefix)
 - `productDetails`: Object containing:
@@ -366,7 +366,7 @@ Response formats follow the respective schema for each entity type (idea, user, 
 
 ### **1. Schema Versioning**
 
-- All implementations must follow schema v1.0.0 specifications
+- All implementations must follow schema v1.1.0 specifications
 - Schema files are versioned using semantic versioning
 - Breaking changes require a new major version
 - Backward compatibility maintained within minor versions
@@ -448,11 +448,11 @@ Response formats follow the respective schema for each entity type (idea, user, 
 
 The complete JSON schemas for all entity types are available in the following files:
 
-1. Idea Schema: [/docs/arkid_idea_schema.json](arkid_idea_schema.json)
-2. User Schema: [/docs/arkid_user_schema.json](arkid_user_schema.json)
-3. Project Schema: [/docs/arkid_project_schema.json](arkid_project_schema.json)
-4. Organization Schema: [/docs/arkid_organization_schema.json](arkid_organization_schema.json)
-5. Product Schema: [/docs/arkid_product_schema.json](arkid_product_schema.json)
+1. Idea Schema: [/docs/schemas/arkid_idea_schema.json](../schemas/arkid_idea_schema.json)
+2. User Schema: [/docs/schemas/arkid_user_schema.json](../schemas/arkid_user_schema.json)
+3. Project Schema: [/docs/schemas/arkid_project_schema.json](../schemas/arkid_project_schema.json)
+4. Organization Schema: [/docs/schemas/arkid_organization_schema.json](../schemas/arkid_organization_schema.json)
+5. Product Schema: [/docs/schemas/arkid_product_schema.json](../schemas/arkid_product_schema.json)
 
 ### Schema Relationships
 

@@ -87,7 +87,12 @@ Key deliverables include:
 ```
 
 ## Documentation
-For more detailed documentation, please see the [docs](./docs) directory.
+For more detailed documentation, please see the following:
+
+- [Specifications](./docs/specifications)
+- [JSON Schemas](./docs/schemas)
+- [API Reference](./docs/api) (coming soon)
+- [User Guides](./docs/guides) (coming soon)
 
 > The documentation will be expanded as development proceeds. The project is currently seeking funding through the Sovereign Tech Fund.
 
