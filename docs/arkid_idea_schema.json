@@ -1,0 +1,166 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://arkid.researchark.eu/arkid-idea.schema.json",
+	"title": "Idea ArkID",
+	"description": "Schema for representing Idea ArkIDs, tracking initial research concepts and innovations. The ArkID system is designed to provide a standardized way for research ideas to be uniquely identified, with the goal of improving traceability from concept to final product across the research ecosystem.",
+	"type": "object",
+	"version": "1.1.0",
+	"lastUpdated": "2025-04-25",
+	"properties": {
+		"arkidIdea": {
+			"type": "string",
+			"pattern": "^ARKI-[0-9]{16}$",
+			"description": "Unique ArkID for the idea, compliant with ISO 27729 (ISNI) standard. The ArkID is a 16-digit number prefixed with 'ARKI-' that uniquely identifies the research idea."
+		},
+		"creationDate": {
+			"type": "string",
+			"format": "date-time",
+			"description": "The date and time when the idea was created and registered."
+		},
+		"title": {
+			"type": "string",
+			"description": "The title or name of the research idea."
+		},
+		"description": {
+			"type": "string",
+			"description": "A detailed description of the research idea, explaining the concept, potential applications, and significance."
+		},
+		"createdBy": {
+			"type": "string",
+			"pattern": "^ARKU-[0-9]{16}$",
+			"description": "The unique ArkID of the user who created this idea, compliant with ISO 27729 (ISNI) standard."
+		},
+		"keywords": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "A list of keywords or tags that describe the main themes and topics of the idea."
+		},
+		"relatedConcepts": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"conceptType": {
+						"type": "string",
+						"enum": [
+							"Similar Idea",
+							"Prior Art",
+							"Inspiration",
+							"Extension",
+							"Counterargument",
+							"Application Area"
+						],
+						"description": "The type of relationship this concept has with the current idea."
+					},
+					"arkidIdea": {
+						"type": "string",
+						"pattern": "^ARKI-[0-9]{16}$",
+						"description": "The unique ArkID for a related idea, if applicable."
+					},
+					"externalIdentifier": {
+						"type": "string",
+						"description": "An external identifier or reference for the related concept, if not in the ArkID system."
+					},
+					"description": {
+						"type": "string",
+						"description": "A brief description of how this concept relates to the current idea."
+					}
+				},
+				"anyOf": [
+					{ "required": ["arkidIdea"] },
+					{ "required": ["externalIdentifier"] }
+				],
+				"required": ["conceptType"]
+			}
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"Draft",
+				"Published",
+				"In Development",
+				"Under Review",
+				"Approved",
+				"Implemented",
+				"Archived",
+				"Deprecated"
+			],
+			"description": "The current status of the idea in its lifecycle."
+		},
+		"verificationStatus": {
+			"type": "string",
+			"enum": ["Verified", "Pending", "Rejected"],
+			"description": "Indicates the verification status of the idea by the platform administrators."
+		},
+		"associatedProjects": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidProject": {
+						"type": "string",
+						"pattern": "^ARKP-[0-9]{16}$",
+						"description": "The unique ArkID for a project that implements or is derived from this idea."
+					},
+					"relationshipType": {
+						"type": "string",
+						"enum": [
+							"Primary Implementation",
+							"Partial Implementation",
+							"Feasibility Study",
+							"Extension",
+							"Alternative Approach"
+						],
+						"description": "The type of relationship between the idea and the project."
+					},
+					"associationDate": {
+						"type": "string",
+						"format": "date",
+						"description": "The date when the idea was associated with the project."
+					}
+				},
+				"required": ["arkidProject", "relationshipType"]
+			}
+		},
+		"associatedProducts": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidProduct": {
+						"type": "string",
+						"pattern": "^ARKD-[0-9]{16}$",
+						"description": "The unique ArkID for a product that resulted from this idea."
+					},
+					"relationshipType": {
+						"type": "string",
+						"enum": [
+							"Direct Result",
+							"Indirect Result",
+							"Prototype",
+							"Proof of Concept",
+							"Component"
+						],
+						"description": "The type of relationship between the idea and the product."
+					}
+				},
+				"required": ["arkidProduct", "relationshipType"]
+			}
+		},
+		"domain": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"description": "The scientific or research domains this idea belongs to."
+		},
+		"license": {
+			"type": "string",
+			"description": "The license under which the idea is shared, if applicable."
+		}
+	},
+	"required": ["arkidIdea", "creationDate", "title", "createdBy"],
+	"additionalProperties": false
+} 

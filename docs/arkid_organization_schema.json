@@ -4,8 +4,8 @@
 	"title": "Organization ArkID",
 	"description": "Schema for representing Organization ArkIDs with detailed information about type, location, and identifiers. The ArkID system is designed to provide a standardized way for research and academic organizations to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
 	"type": "object",
-	"version": "1.0.0",
-	"lastUpdated": "2024-10-24",
+	"version": "1.1.0",
+	"lastUpdated": "2025-04-25",
 	"properties": {
 		"arkidOrg": {
 			"type": "string",

@@ -4,8 +4,8 @@
 	"title": "User ArkID",
 	"description": "Schema for representing User ArkIDs as compliant with ISO 27729 (ISNI) standards. The ArkID system is designed to provide a standardized way for individual researchers and contributors to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
 	"type": "object",
-	"version": "1.0.0",
-	"lastUpdated": "2024-10-24",
+	"version": "1.1.0",
+	"lastUpdated": "2025-04-25",
 	"properties": {
 		"arkidUser": {
 			"type": "string",
@@ -16,6 +16,35 @@
 			"type": "string",
 			"format": "date-time",
 			"description": "The date and time when the user's ArkID was created."
+		},
+		"associatedIdeas": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidIdea": {
+						"type": "string",
+						"pattern": "^ARKI-[0-9]{16}$",
+						"description": "The unique ArkID for the idea the user is associated with, compliant with ISO 27729 (ISNI) standard."
+					},
+					"associationStartDate": {
+						"type": "string",
+						"format": "date",
+						"description": "The date when the user's association with the idea started."
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"Creator",
+							"Contributor",
+							"Reviewer",
+							"Supervisor"
+						],
+						"description": "The user's role or contribution to the idea."
+					}
+				},
+				"required": ["arkidIdea", "role"]
+			}
 		},
 		"associatedProjects": {
 			"type": "array",
@@ -140,6 +169,44 @@
 					{ "required": ["doiOrgId"] },
 					{ "required": ["picId"] }
 				]
+			}
+		},
+		"associatedProducts": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidProduct": {
+						"type": "string",
+						"pattern": "^ARKD-[0-9]{16}$",
+						"description": "The unique ArkID for the product the user is associated with, compliant with ISO 27729 (ISNI) standard."
+					},
+					"associationStartDate": {
+						"type": "string",
+						"format": "date",
+						"description": "The date when the user's association with the product started."
+					},
+					"associationEndDate": {
+						"type": ["string", "null"],
+						"format": "date",
+						"description": "The date when the user's association with the product ended. Use 'null' for ongoing associations."
+					},
+					"contributionType": {
+						"type": "string",
+						"enum": [
+							"Creator",
+							"Author",
+							"Contributor",
+							"Developer",
+							"Inventor",
+							"Designer",
+							"Reviewer",
+							"Editor"
+						],
+						"description": "The type of contribution the user made to the product."
+					}
+				},
+				"required": ["arkidProduct", "contributionType"]
 			}
 		},
 		"orcidId": {

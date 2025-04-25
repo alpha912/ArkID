@@ -4,8 +4,8 @@
 	"title": "Project ArkID",
 	"description": "Schema for representing Project ArkIDs, including related metadata such as people, budget, and publications. The ArkID system is designed to provide a standardized way for research projects to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
 	"type": "object",
-	"version": "1.0.0",
-	"lastUpdated": "2024-10-24",
+	"version": "1.1.0",
+	"lastUpdated": "2025-04-25",
 	"properties": {
 		"arkidProject": {
 			"type": "string",
@@ -26,6 +26,11 @@
 				"projectBrief": {
 					"type": "string",
 					"description": "A short summary or description of the project."
+				},
+				"originatingIdea": {
+					"type": "string",
+					"pattern": "^ARKI-[0-9]{16}$",
+					"description": "The unique ArkID for the idea that led to this project, if applicable."
 				},
 				"projectDuration": {
 					"type": "object",
