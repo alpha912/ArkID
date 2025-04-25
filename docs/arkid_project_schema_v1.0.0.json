@@ -1,0 +1,196 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://arkid.researchark.eu/arkid-project.schema.json",
+	"title": "Project ArkID",
+	"description": "Schema for representing Project ArkIDs, including related metadata such as people, budget, and publications. The ArkID system is designed to provide a standardized way for research projects to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
+	"type": "object",
+	"version": "1.0.0",
+	"lastUpdated": "2024-10-24",
+	"properties": {
+		"arkidProject": {
+			"type": "string",
+			"pattern": "^ARKP-[0-9]{16}$",
+			"description": "Unique ArkID for the project, compliant with ISO 27729 (ISNI) standard. The ArkID is a 16-digit number prefixed with 'ARKP-' that uniquely identifies the project."
+		},
+		"projectDetails": {
+			"type": "object",
+			"properties": {
+				"projectAcronym": {
+					"type": "string",
+					"description": "The short acronym or abbreviation used to refer to the project."
+				},
+				"fullProjectTitle": {
+					"type": "string",
+					"description": "The complete title of the project."
+				},
+				"projectBrief": {
+					"type": "string",
+					"description": "A short summary or description of the project."
+				},
+				"projectDuration": {
+					"type": "object",
+					"properties": {
+						"startDate": {
+							"type": "string",
+							"format": "date",
+							"description": "The start date of the project, in ISO date format (YYYY-MM-DD)."
+						},
+						"endDate": {
+							"type": "string",
+							"format": "date",
+							"description": "The end date of the project, in ISO date format (YYYY-MM-DD)."
+						}
+					},
+					"required": ["startDate", "endDate"]
+				},
+				"projectBudget": {
+					"type": "object",
+					"properties": {
+						"currency": {
+							"type": "string",
+							"pattern": "^[A-Z]{3}$",
+							"description": "The ISO 4217 three-letter currency code for the project budget."
+						},
+						"amount": {
+							"type": "integer",
+							"minimum": 0,
+							"description": "The total budget amount for the project, as a positive integer value."
+						}
+					},
+					"required": ["currency", "amount"]
+				},
+				"website": {
+					"type": "string",
+					"format": "uri",
+					"description": "The website URL for the project."
+				}
+			},
+			"required": ["projectAcronym", "fullProjectTitle"]
+		},
+		"associatedPeople": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "object",
+						"properties": {
+							"firstName": {
+								"type": "string",
+								"description": "The first name of the person."
+							},
+							"lastName": {
+								"type": "string",
+								"description": "The last name of the person."
+							}
+						},
+						"required": ["firstName", "lastName"]
+					},
+					"arkidUser": {
+						"type": "string",
+						"pattern": "^ARKU-[0-9]{16}$",
+						"description": "The unique ArkID for the user, compliant with ISO 27729 (ISNI) standard."
+					},
+					"orcidId": {
+						"type": "string",
+						"pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$",
+						"description": "The unique ORCID identifier for the person, in the format 'xxxx-xxxx-xxxx-xxxx'."
+					},
+					"role": {
+						"type": "string",
+						"description": "The role or position of the person within the project."
+					},
+					"organizationName": {
+						"type": "string",
+						"description": "The name of the organization the person is associated with."
+					},
+					"arkidOrg": {
+						"type": "string",
+						"pattern": "^ARKO-[0-9]{16}$",
+						"description": "The unique ArkID for the organization the person is associated with, compliant with ISO 27729 (ISNI) standard."
+					}
+				},
+				"required": ["name", "arkidUser", "role"]
+			}
+		},
+		"associatedOrganizations": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"organizationRole": {
+						"type": "string",
+						"enum": [
+							"Primary Funding Organization",
+							"Co-Funding Organization",
+							"Funding Management Organization",
+							"Non-Funding Partner Organization",
+							"Project Coordinator Organization",
+							"Project Member Organization",
+							"Project Associate Organization"
+						],
+						"description": "The role of the organization in relation to the project."
+					},
+					"arkidOrg": {
+						"type": "string",
+						"pattern": "^ARKO-[0-9]{16}$",
+						"description": "The unique ArkID for the organization, compliant with ISO 27729 (ISNI) standard."
+					},
+					"rorId": {
+						"type": "string",
+						"pattern": "^https?://ror.org/[a-z0-9]{9}$",
+						"description": "The unique Research Organization Registry (ROR) identifier for the organization."
+					},
+					"doiOrgId": {
+						"type": "string",
+						"pattern": "^10.\\d{4,9}/[-._;()/A-Z0-9]+$",
+						"description": "The unique Digital Object Identifier (DOI) for the organization."
+					},
+					"picId": {
+						"type": "string",
+						"pattern": "^\\d{9}$",
+						"description": "The unique Participant Identification Code (PIC) for the organization."
+					}
+				},
+				"required": ["organizationRole"],
+				"anyOf": [
+					{ "required": ["arkidOrg"] },
+					{ "required": ["rorId"] },
+					{ "required": ["doiOrgId"] },
+					{ "required": ["picId"] }
+				]
+			}
+		},
+		"publications": {
+			"type": "object",
+			"properties": {
+				"doiIds": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^10.\\d{4,9}/[-._;()/A-Z0-9]+$",
+						"description": "DOI identifiers for project publications."
+					}
+				},
+				"isbnIds": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^(97(8|9))\\d{9}(\\d|X)$",
+						"description": "ISBN-13 identifiers for project-related publications."
+					}
+				},
+				"arxivIds": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "^\\d{4}.\\d{4,5}$",
+						"description": "arXiv identifiers for project-related publications."
+					}
+				}
+			}
+		}
+	},
+	"required": ["arkidProject", "projectDetails"],
+	"additionalProperties": false
+}

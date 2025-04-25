@@ -1,0 +1,87 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://arkid.researchark.eu/arkid-organization.schema.json",
+	"title": "Organization ArkID",
+	"description": "Schema for representing Organization ArkIDs with detailed information about type, location, and identifiers. The ArkID system is designed to provide a standardized way for research and academic organizations to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
+	"type": "object",
+	"version": "1.0.0",
+	"lastUpdated": "2024-10-24",
+	"properties": {
+		"arkidOrg": {
+			"type": "string",
+			"pattern": "^ARKO-[0-9]{16}$",
+			"description": "Unique ArkID for the organization, compliant with ISO 27729 (ISNI) standard. The ArkID is a 16-digit number prefixed with 'ARKO-' that uniquely identifies the organization."
+		},
+		"organizationDetails": {
+			"type": "object",
+			"properties": {
+				"organizationName": {
+					"type": "string",
+					"description": "The full name of the organization."
+				},
+				"organizationAcronym": {
+					"type": "string",
+					"description": "The acronym or short name used to refer to the organization."
+				},
+				"organizationType": {
+					"type": "string",
+					"enum": [
+						"Research Institution",
+						"Educational Institution",
+						"Non-Profit Organization (NPO)",
+						"Public Sector Organization",
+						"Micro, Small, and Medium Enterprises (MSMEs)",
+						"Start-up",
+						"Large Enterprise",
+						"International Organization",
+						"National Consortium",
+						"Transnational Consortium",
+						"Other (Organization)"
+					],
+					"description": "The type of organization, selected from a predefined list of options."
+				}
+			},
+			"required": [
+				"organizationName",
+				"organizationAcronym",
+				"organizationType"
+			]
+		},
+		"organizationLocation": {
+			"type": "object",
+			"properties": {
+				"city": {
+					"type": "string",
+					"description": "The city where the organization is located."
+				},
+				"country": {
+					"type": "string",
+					"pattern": "^[A-Z]{2}$",
+					"description": "The ISO 3166-1 alpha-2 country code for the country where the organization is located."
+				}
+			},
+			"required": ["city", "country"]
+		},
+		"rorId": {
+			"type": "string",
+			"description": "The unique Research Organization Registry (ROR) identifier for the organization. ROR IDs are in the format 'https://ror.org/[a-z0-9]{9}'."
+		},
+		"doiOrgId": {
+			"type": ["string", "null"],
+			"pattern": "^10.\\d{4,9}/[-._;()/A-Z0-9]+$",
+			"description": "The unique Digital Object Identifier (DOI) for the organization. DOI IDs are in the format '10.xxxx/yyy'."
+		},
+		"picId": {
+			"type": ["string", "null"],
+			"pattern": "^\\d{9}$",
+			"description": "The unique Participant Identification Code (PIC) for the organization. PIC IDs are 9-digit numbers."
+		},
+		"website": {
+			"type": "string",
+			"format": "uri",
+			"description": "The website URL for the organization."
+		}
+	},
+	"required": ["arkidOrg", "organizationDetails", "organizationLocation"],
+	"additionalProperties": false
+}

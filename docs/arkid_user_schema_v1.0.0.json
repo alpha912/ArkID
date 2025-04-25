@@ -1,0 +1,193 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://arkid.researchark.eu/arkid-user.schema.json",
+	"title": "User ArkID",
+	"description": "Schema for representing User ArkIDs as compliant with ISO 27729 (ISNI) standards. The ArkID system is designed to provide a standardized way for individual researchers and contributors to be uniquely identified, with the goal of improving collaboration and data integration across the research ecosystem.",
+	"type": "object",
+	"version": "1.0.0",
+	"lastUpdated": "2024-10-24",
+	"properties": {
+		"arkidUser": {
+			"type": "string",
+			"pattern": "^ARKU-[0-9]{16}$",
+			"description": "Unique ArkID for the user, compliant with ISO 27729 (ISNI) standard. The ArkID is a 16-digit number prefixed with 'ARKU-' that uniquely identifies the user."
+		},
+		"creationDate": {
+			"type": "string",
+			"format": "date-time",
+			"description": "The date and time when the user's ArkID was created."
+		},
+		"associatedProjects": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidProject": {
+						"type": "string",
+						"pattern": "^ARKP-[0-9]{16}$",
+						"description": "The unique ArkID for the project the user is associated with, compliant with ISO 27729 (ISNI) standard."
+					},
+					"associationStartDate": {
+						"type": "string",
+						"format": "date",
+						"description": "The date when the user's association with the project started."
+					},
+					"associationEndDate": {
+						"type": ["string", "null"],
+						"format": "date",
+						"description": "The date when the user's association with the project ended. Use 'null' for ongoing associations."
+					},
+					"role": {
+						"type": "string",
+						"description": "The user's role or position within the project."
+					}
+				},
+				"required": ["arkidProject", "associationStartDate", "role"]
+			}
+		},
+		"managedProjects": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidProject": {
+						"type": "string",
+						"pattern": "^ARKP-[0-9]{16}$",
+						"description": "The unique ArkID for the project the user manages, compliant with ISO 27729 (ISNI) standard."
+					}
+				},
+				"required": ["arkidProject"]
+			}
+		},
+		"associatedOrganizations": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidOrg": {
+						"type": "string",
+						"pattern": "^ARKO-[0-9]{16}$",
+						"description": "The unique ArkID for the organization the user is associated with, compliant with ISO 27729 (ISNI) standard."
+					},
+					"associationStartDate": {
+						"type": "string",
+						"format": "date",
+						"description": "The date when the user's association with the organization started."
+					},
+					"associationEndDate": {
+						"type": ["string", "null"],
+						"format": "date",
+						"description": "The date when the user's association with the organization ended. Use 'null' for ongoing associations."
+					},
+					"role": {
+						"type": "string",
+						"description": "The user's role or position within the organization."
+					},
+					"rorId": {
+						"type": "string",
+						"pattern": "^https?://ror.org/[a-z0-9]{9}$",
+						"description": "The unique Research Organization Registry (ROR) identifier for the organization."
+					},
+					"doiOrgId": {
+						"type": "string",
+						"pattern": "^10.\\d{4,9}/[-._;()/A-Z0-9]+$",
+						"description": "The unique Digital Object Identifier (DOI) for the organization."
+					},
+					"picId": {
+						"type": "string",
+						"pattern": "^\\d{9}$",
+						"description": "The unique Participant Identification Code (PIC) for the organization."
+					}
+				},
+				"required": ["role"],
+				"anyOf": [
+					{ "required": ["arkidOrg"] },
+					{ "required": ["rorId"] },
+					{ "required": ["doiOrgId"] },
+					{ "required": ["picId"] }
+				]
+			}
+		},
+		"managedOrganizations": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"arkidOrg": {
+						"type": "string",
+						"pattern": "^ARKO-[0-9]{16}$",
+						"description": "The unique ArkID for the organization the user manages, compliant with ISO 27729 (ISNI) standard."
+					},
+					"rorId": {
+						"type": "string",
+						"pattern": "^https?://ror.org/[a-z0-9]{9}$",
+						"description": "The unique Research Organization Registry (ROR) identifier for the organization."
+					},
+					"doiOrgId": {
+						"type": "string",
+						"pattern": "^10.\\d{4,9}/[-._;()/A-Z0-9]+$",
+						"description": "The unique Digital Object Identifier (DOI) for the organization."
+					},
+					"picId": {
+						"type": "string",
+						"pattern": "^\\d{9}$",
+						"description": "The unique Participant Identification Code (PIC) for the organization."
+					}
+				},
+				"required": ["arkidOrg"],
+				"anyOf": [
+					{ "required": ["rorId"] },
+					{ "required": ["doiOrgId"] },
+					{ "required": ["picId"] }
+				]
+			}
+		},
+		"orcidId": {
+			"type": "string",
+			"pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$",
+			"description": "The unique ORCID identifier for the user, in the format 'xxxx-xxxx-xxxx-xxxx'."
+		},
+		"userBio": {
+			"type": "string",
+			"description": "A brief biographical description of the user."
+		},
+		"name": {
+			"type": "object",
+			"properties": {
+				"prefix": {
+					"type": "string",
+					"description": "An optional title or prefix for the user (e.g., Dr., Prof., Mr., Ms.)."
+				},
+				"firstName": {
+					"type": "string",
+					"description": "The user's first name."
+				},
+				"middleName": {
+					"type": ["string", "null"],
+					"description": "The user's middle name (if applicable)."
+				},
+				"lastName": {
+					"type": "string",
+					"description": "The user's last name."
+				},
+				"suffix": {
+					"type": ["string", "null"],
+					"description": "An optional suffix for the user (e.g., Jr., Sr., Ph.D.)."
+				}
+			},
+			"required": ["firstName", "lastName"]
+		},
+		"websiteUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The website URL for the user."
+		},
+		"verificationStatus": {
+			"type": "string",
+			"enum": ["Verified", "Pending", "Rejected"],
+			"description": "Indicates the verification status of the user to create ArkIDs for projects or organizations."
+		}
+	},
+	"required": ["arkidUser", "creationDate", "name"],
+	"additionalProperties": false
+}
