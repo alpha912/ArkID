@@ -1,9 +1,5 @@
 ![ArkID GitHub Banner](assets/arkid-github-banner.png)
 
-<p align="center">
-  <img src="assets/logo-with-text.png" alt="ArkID Logo" width="300"/>
-</p>
-
 # ArkID
 
 ## Overview
@@ -107,6 +103,10 @@ For more detailed documentation, please see the following:
 
 ## Contact
 For inquiries, please contact [info@researchark.eu](mailto:info@researchark.eu).
+
+<p align="center">
+  <img src="assets/logo-with-text.png" alt="ArkID Logo" width="300"/>
+</p>
 
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
