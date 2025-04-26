@@ -96,7 +96,7 @@ For more detailed documentation, please see the following:
 - [API Reference](./docs/api) (coming soon)
 - [User Guides](./docs/guides) (coming soon)
 
-> The documentation will be expanded as development proceeds. The project is currently seeking funding through the Sovereign Tech Fund.
+> The documentation will be expanded as development proceeds. The project is currently seeking funding through various channels and will be open-sourced in phases.
 
 ## Website
 [https://arkid.researchark.eu/](https://arkid.researchark.eu/)
