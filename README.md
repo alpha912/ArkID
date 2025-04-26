@@ -1,3 +1,9 @@
+![ArkID GitHub Banner](assets/arkid-github-banner.png)
+
+<p align="center">
+  <img src="assets/logo-with-text.png" alt="ArkID Logo" width="300"/>
+</p>
+
 # ArkID
 
 ## Overview
@@ -95,6 +101,12 @@ For more detailed documentation, please see the following:
 - [User Guides](./docs/guides) (coming soon)
 
 > The documentation will be expanded as development proceeds. The project is currently seeking funding through the Sovereign Tech Fund.
+
+## Website
+[https://arkid.researchark.eu/](https://arkid.researchark.eu/)
+
+## Contact
+For inquiries, please contact [info@researchark.eu](mailto:info@researchark.eu).
 
 ## License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
